@@ -1,0 +1,4 @@
+aiogram==2.24
+python-dotenv==0.20.0
+sqlalchemy==1.4
+alembic==1.9.2
