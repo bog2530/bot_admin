@@ -32,18 +32,6 @@ async def message_ls(message: types.Message, state: FSMContext):
     )
     await state.set_state(Storage.id_or_all)
 
-
-# @form_router.message('Главное меню')
-# @form_router.message(F.text.casefold() == 'Главное меню 🔙')
-# # @form_router.message(F.text.casefold() == 'Главное меню 🔙')
-# async def to_menu(message: types.Message, state: FSMContext):
-#     await state.clear()
-#     await message.answer(
-#         "Оправка отменена",
-#         reply_markup=my_menu,
-#     )
-
-
 @form_router.message(Storage.id_or_all)
 async def input_mesage(message: types.Message, state: FSMContext):
     if message.text == 'Главное меню 🔙':
@@ -82,6 +70,7 @@ async def message_sending(message: types.Message, state: FSMContext):
         await cancellation_message(message, state)
     elif message.text == 'Y':
         data = await state.update_data(confirmation=message.text)
+        # отправить запрос к дочернему боту
         await state.clear()
         await sending(message=message, data=data)
 
